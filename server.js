@@ -1,26 +1,14 @@
-const express = require("express")
-const { v4: uuidv4 } = require('uuid')
-const router = express.Router()
-const app = express()
-const porta = 3333
+const app = require('./app')
+const connectDatabase = require('./bancoDeDados')
 
-//POST
-function criaManhwa(req, response) {
-    const novaManhwa = {
-        id: uuidv4(),
-        obra: req.body.obra,
-        imagem: req.body.imagem,
-        sinopse: req.body.sinopse
-    }
-    
-    manhwas.push(novaManhwa)
+const port = Number(process.env.PORT) || 3333
 
-    response.json(manhwas)
-}
-function mostraPorta() {
-    console.log("Servidor criado e rodando na porta ", porta)
+async function start() {
+  await connectDatabase()
+  app.listen(port, () => console.log(`MeuManhwa API disponível em http://localhost:${port}`))
 }
 
-app.use(router.post('/manhwas', criaManhwa))
-
-app.listen(porta, mostraPorta)
+start().catch((error) => {
+  console.error('Não foi possível iniciar a API.', error)
+  process.exit(1)
+})
