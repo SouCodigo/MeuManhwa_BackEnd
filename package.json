@@ -1,10 +1,11 @@
 {
   "name": "meumanhwa_backend",
   "version": "1.0.0",
-  "description": "> Turma 1",
-  "main": "bancoDeDados.js",
+  "description": "API REST para o catálogo MeuManhwa.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch server.js",
+    "test": "node --test",
     "start": "node server.js"
   },
   "keywords": [],
